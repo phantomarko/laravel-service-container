@@ -2,30 +2,26 @@
 
 namespace App\Http\UseCases;
 
-use App\Http\Services\DataGenerator;
-use App\Http\Services\StringTransformer;
+use App\Http\Services\NumberHandler;
+use App\Http\Services\StringHandler;
 
 class ProcessString
 {
-    /** @var StringTransformer[]  */
-    private $stringTransformers;
-    /** @var DataGenerator[] */
-    private $dataGenerators;
+    private $stringHandler;
+    private $numberHandler;
 
-    public function __construct(array $stringTransformers, array $dataGenerators)
+    public function __construct(StringHandler $stringHandler, NumberHandler $numberHandler)
     {
-        $this->stringTransformers = $stringTransformers;
-        $this->dataGenerators = $dataGenerators;
+        $this->stringHandler = $stringHandler;
+        $this->numberHandler = $numberHandler;
     }
 
     public function exec(string $string): string
     {
         if (is_numeric($string)) {
-            return $this->dataGenerators[array_rand($this->dataGenerators)]
-                ->byNumber(intval($string));
+            return $this->numberHandler->handle(intval($string));
         } else {
-            return $this->stringTransformers[array_rand($this->stringTransformers)]
-                ->transform($string);
+            return $this->stringHandler->handle($string);
         }
     }
 }

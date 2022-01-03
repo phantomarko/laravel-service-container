@@ -4,5 +4,5 @@ namespace App\Http\Services;
 
 interface DataGenerator
 {
-    public function byNumber(int $number): string;
+    public function generate(int $number): string;
 }

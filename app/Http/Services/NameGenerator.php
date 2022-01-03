@@ -4,7 +4,7 @@ namespace App\Http\Services;
 
 class NameGenerator implements DataGenerator
 {
-    public function byNumber(int $number): string
+    public function generate(int $number): string
     {
         return ($number <= 2738 && $number >= 1)
             ? $this->getNames()[$number]

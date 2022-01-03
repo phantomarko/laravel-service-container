@@ -4,7 +4,7 @@ namespace App\Http\Services;
 
 class PokemonGenerator implements DataGenerator
 {
-    public function byNumber(int $number): string
+    public function generate(int $number): string
     {
         return ($number <= 151 && $number >= 1)
             ? $this->getPokemons()[$number]
